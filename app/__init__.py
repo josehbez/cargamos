@@ -16,7 +16,7 @@ app.config.from_json("../deployments/%s/config.json" %  config_name)
 db = SQLAlchemy(app)
                                             
 # API manager 
-api = Api(app, prefix='/api/v1')
+api = Api(app, prefix='/v1')
 
 def api_load_resources():
     from app.auth.resources import Register, Login
@@ -37,13 +37,8 @@ def index():
 @app.before_request
 def _jwt_required():
     from app.auth.resources import jwt_required
-    err = jwt_required(
-        request.headers.get('Authorization'), 
-        request.path
-    )
+    err = jwt_required()
     if err != None:
         return err, 404
-
-
 
 db.create_all()
