@@ -15,6 +15,8 @@ def jwt_required():
     exclude =[
         '/v1/auth/login',
         '/v1/auth/register',
+        '/',
+        '',
     ]
     if path not in exclude:
         try:

@@ -13,8 +13,7 @@ class AppTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         self.app = app
-        self.client = self.app.test_client
-        
+        self.client = self.app.test_client        
 
     def test_auth(self):
         id = self.randid()
@@ -59,7 +58,34 @@ class AppTestCase(unittest.TestCase):
         res = self.client().delete('/v1/warehouse/%s' % data.get('id'), headers=headers)
         self.assertEqual(res.status_code, 204, res.data)
 
+    def test_product(self):
+        id = self.randid()
+        data = {
+            'name': "Name %s" % id,
+            'sku': "SKU%s" % id
+        }
+        res = self.client().post('/v1/product', data=data, headers=headers)
+        self.assertEqual(res.status_code, 201, res.data)
+        data = res.json.get('payload')
+        
+        res = self.client().post('/v1/product', data=data, headers=headers)
+        self.assertEqual(res.status_code, 500, res.data)
+        
+        res = self.client().get('/v1/product', headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
 
+        res = self.client().get('/v1/product/%s' % data.get('id'), headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
+
+        res = self.client().get('/v1/product/%s' % data.get('sku'), headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
+
+        data.update({'name': "%s Update" % data.get('name')})
+        res = self.client().put('/v1/product/%s' % data.get('id'), data=data,headers=headers)
+        self.assertEqual(res.status_code, 201, res.data)
+        
+        res = self.client().delete('/v1/product/%s' % data.get('id'), headers=headers)
+        self.assertEqual(res.status_code, 204, res.data)
 
 if __name__ == '__main__':
     unittest.main()

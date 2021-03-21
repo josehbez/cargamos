@@ -25,7 +25,9 @@ def api_load_resources():
     
     from app.warehouse.resources import Warehouse as RSWarehouse
     api.add_resource(RSWarehouse, "/warehouse", "/warehouse/<int:id>")
-
+    
+    from app.product.resources import Product as RSProduct
+    api.add_resource(RSProduct, "/product", "/product/<string:id>")
 
 api_load_resources()
 

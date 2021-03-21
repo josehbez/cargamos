@@ -4,9 +4,23 @@ from typing import Any
 from flask_restful import Resource
 from . import db
 
+def is_int(s):
+    """
+        Check value is integer using cast
+        params: string value
+        return: boolean
+    """
+    try: 
+        int(s)
+        return True
+    except ValueError:
+        return False
+
 def rp(success=False, message=None, payload=None):
     """
         rp (aka, response payload) return standard payload
+        params: success=boolean, message=string|None, payload=dict|None
+        return: dict
     """
     return{
         'success': success,
@@ -16,13 +30,17 @@ def rp(success=False, message=None, payload=None):
 
     
 class BaseResource(Resource):
-
+    """
+        RESTful resource base class
+    """
     def reqparse(self) -> Any: 
         raise NotImplementedError
 
 
 class BaseModel(db.Model):
-
+    """
+        SQLAlchemy model bastract class
+    """
     __abstract__ = True   
     
     id = db.Column(db.Integer, primary_key=True)
