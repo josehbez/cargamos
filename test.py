@@ -35,7 +35,7 @@ class AppTestCase(unittest.TestCase):
         res = self.client().post('/v1/auth/login', data=data)        
         self.assertEqual(res.status_code, 201, res.data)
         
-        self.headers.update({'Authorization':res.json.get('payload').get('token')})
+        self.headers.update({'Authorization':'Bearer '+ res.json.get('payload').get('token')})
         
 
     def test_warehouse(self):

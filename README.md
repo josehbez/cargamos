@@ -22,7 +22,9 @@ Simple gestor de inventario desarrollado sobre FLASK, FLASK-RESTFUL, FLASK-SQLAL
 * Instalación
 * Diseño DB
 * Diseño RESTful
-* Demo
+  * Url demo
+  * Documentacion en Postman
+  * Demo en Postman
 * Tests
 
 ## Instalación
@@ -132,15 +134,49 @@ Ejemplo:
 
 ## Diseño RESTful
 
+### URL
+
+http://demo.josehbez.com
+
+### Documentación
+
+https://documenter.getpostman.com/view/5247124/TzCFfqC8
+
+### Demo
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ca919d4646123590d6ea#?env%5BStaging%5D=W3sia2V5IjoiVVJMIiwidmFsdWUiOiJodHRwOi8vZGVtby5qb3NlaGJlei5jb20iLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlVTRVJfTkFNRSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJVU0VSX0VNQUlMIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlVTRVJfUEFTU1dPUkQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiVE9LRU4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiV0hfTkFNRSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJXSF9BRERSRVNTIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlBST0RVQ1RfTkFNRSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJQUk9EVUNUX1NLVSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX1d)
+
+
+
 ```bash
+# Auth:
+
+POST /v1/auth/register HTTP/1.1
+POST /v1/auth/login HTTP/1.1
+
+# Warehouse
+POST /v1/warehouse HTTP/1.1
+PUT /v1/warehouse/{{WH_ID}} HTTP/1.1
+GET /v1/warehouse HTTP/1.1
+DELETE /v1/warehouse/{{WH_ID}} HTTP/1.1
+
+# Product
+POST /v1/product HTTP/1.1
+PUT /v1/product/{{PRODUCT_ID}} HTTP/1.1
+GET /v1/product HTTP/1.1
+DELETE /v1/product/{{PRODUCT_ID}} HTTP/1.1
+
+# Stock Move
+POST /v1/purchase HTTP/1.1
+POST /v1/sale HTTP/1.1
+
+# Stock 
+GET /v1/stock HTTP/1.1
+GET /v1/stock/product/{{PRODUCT_ID}} HTTP/1.1
+GET /v1/stock/warehouse/{{WH_ID}} HTTP/1.1
+GET /v1/stock/{{PRODUCT_ID}}/{{WH_ID}} HTTP/1.1
 
 ```
-
-
-
-## Demo
-
-RESTful demo http://demo.josehbez.com
 
 ## Tests
 
