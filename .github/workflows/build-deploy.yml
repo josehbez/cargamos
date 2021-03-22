@@ -27,7 +27,7 @@ jobs:
             [[ ! -d cargamos ]] && git clone https://github.com/josehbez/cargamos.git
             [[ -d cargamos ]] && cd cargamos; git pull
             export APP_SETTINGS=production
-            docker-compose stop || true
+            docker-compose -f /mnt/cargamos/docker-compose.yml stop || true
             docker rm cargamos || true
             docker-compose -f /mnt/cargamos/docker-compose.yml up --build -d
             docker container  exec -t cargamos python manage.py db upgrade
