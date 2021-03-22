@@ -44,7 +44,7 @@ api_load_resources()
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", environment=config_name)
 
 
 @app.before_request
