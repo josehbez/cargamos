@@ -15,37 +15,51 @@
 
 # Cargamos
 
-RESTfull manejo de compras, ventas e inventario.
+Simple gestor de inventario desarrollado sobre FLASK, FLASK-RESTFUL, FLASK-SQLALCHEMY, 
 
 ## Tabla de contenido
 
 * Instalación
 * Diseño DB
-* Diseño RESTfull
+* Diseño RESTful
 * Demo
 * Tests
 
 ## Instalación
 
 ```bash
-# Configuraciones definidos por:
-# APP_SETTINGS dev | test | production
+# Configuración definido por: APP_SETTINGS
+# Puede tener los siguientes valores: dev | test | production
+# El archivo config.json debe ser colocado en deployments/${APP_SETTINGS}/config.json
+#
+# Variables importantes del archivo config.json
+#
+# SQLALCHEMY_DATABASE_URI - Conector base dedatos
+# e.g: postgresql://USERNAME:PASSWORD@HOST/DBNAME 
+# e.g: sqlite:///../storage/cargamos.db
+#
+# SECRET_KEY - Llave de la configuración
+# e.g: \\x83\\xb8\\xf0\\x9e%\\x1f\\xd9\\xf2\\xf6\\x8b\\x04"\\x886Pjz\\x9f2M
 
-## Por pipenv
-## Revisar plantilla deployments/testing/config.json
-pipenv shell 
+
+################## pipenv ##################
+# Copiar plantilla deployments/testing/config.json
+# Pegar el archivo en deployments/dev/config.json
+
+pipenv shell
 pip install -r requirements.txt
 export APP_SETTINGS=dev
 python manage.py db upgrade
 python run.py
 
-## Por docker-compose
-## Revisar plantilla deployments/production/config.json
+################## docker-compose ##################
+# Revisar plantilla deployments/production/config.json
+
 export APP_SETTINGS=production
 docker-compose up --build -d
 docker container  exec -t cargamos python manage.py db upgrade
 
-## Puerto 8844
+################## Puerto 8844 ##################
 * Serving Flask app "app" (lazy loading)
 * Running on http://0.0.0.0:8844/ (Press CTRL+C to quit)
 ```
@@ -53,37 +67,37 @@ docker container  exec -t cargamos python manage.py db upgrade
 ## Diseño DB
 
 ```bash
-Todas heredan de una clase abastracta y tienen los siguientes campos:
+Todas las tablas heredan de una clase abstracta y tienen los siguientes campos:
 1.- name - Nombre del movimiento, transaccion ó usuario
 2.- id - Identificador del registro
-3.- date_created - Fecha de creacion del registro
-4.- date_modified - Fecha de la ultima modificacion del registro
+3.- date_created - Fecha de creación del registro
+4.- date_modified - Fecha de la ultima modificación del registro
 
 Tablas:
 
-1.- USERS - Se utiliza para el manejo autenticaciones
-	* email - Correo del usuario 
+1.- USERS - Se utiliza para el manejo de autenticaciones
+	* email - Correo del usuario
 	* password - Contraseña encriptada el usuario
-	* token - Token authorizacion para peticiones HTTP
+	* token - Token de authorización para peticiones HTTP
 
 2.- WAREHOUSE - Se utiliza para registrar almacenes (tiendas)
-	* address - Direccion del alamcen
+	* address - Dirección del almacén
 
-3.- PRODUCT - Se utiliza para registra productos
-	* sku - unidad de mantenimiento en almacen del producto
+3.- PRODUCT - Se utiliza para registrar productos
+	* sku - unidad de mantenimiento en almacén del producto
 
-4.- STOCK_MOVE - Se utiliza para registrar movimientos de alamcen
+4.- STOCK_MOVE - Se utiliza para registrar movimientos de almacén
 	* type - Tipo de movimiento entrda (in) o salida (out)
 	* qty - Cantidad de movmiento
 	* product_id - ID del producto 
-	* warahouse_id - ID del almacen
+	* warahouse_id - ID del almacén
 
 Vistas(consultas):
 	
 1.- STOCK - manejo de existencias
 	* qry - Cantidad de existencias 
 	* product_id - ID del producto
-	* warehouser - ID del almacen
+	* warehouser - ID del almacén
 
 
 Ejemplo:
@@ -116,7 +130,7 @@ Ejemplo:
 
 ```
 
-## Diseño RESTfull
+## Diseño RESTful
 
 ```bash
 
@@ -126,7 +140,7 @@ Ejemplo:
 
 ## Demo
 
-RESTfull demo http://demo.josehbez.com
+RESTful demo http://demo.josehbez.com
 
 ## Tests
 
