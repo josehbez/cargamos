@@ -2,7 +2,7 @@
 #  Copyright (c) 2021 The Project Cargamos Authors
 import unittest
 import pdb
-from app import app
+from app import app, commun
 import random
 
 headers = {}
@@ -86,6 +86,40 @@ class AppTestCase(unittest.TestCase):
         
         res = self.client().delete('/v1/product/%s' % data.get('id'), headers=headers)
         self.assertEqual(res.status_code, 204, res.data)
+
+    def test_stock(self):        
+        res = self.client().get('/v1/stock', headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
+        
+        product_id = 1
+        warehouse_id = 1
+        res = self.client().get('/v1/stock/%s/%s'%(product_id, warehouse_id), headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
+        
+        res = self.client().get('/v1/stock/product/%s'% product_id, headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
+        
+        res = self.client().get('/v1/stock/warehouse/%s'% warehouse_id, headers=headers)
+        self.assertEqual(res.status_code, 200, res.data)
+
+    
+    def test_purchase(self):
+        data = {
+            'qty': 1, 
+            'product_id': 1, 
+            'warehouse_id': 4, 
+        }
+        res = self.client().post('/v1/purchase', data=data, headers=headers)
+        self.assertEqual(res.status_code, 201, res.data)
+
+    def test_sale(self):
+        data = {
+            'qty': 1, 
+            'product_id': 1, 
+            'warehouse_id': 4, 
+        }
+        res = self.client().post('/v1/sale', data=data, headers=headers)        
+        self.assertEqual(res.status_code, 201, res.data)
 
 if __name__ == '__main__':
     unittest.main()
