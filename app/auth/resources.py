@@ -10,7 +10,7 @@ import datetime
 from app import app
 
 def jwt_required():
-    authorization = request.headers.get('Authorization')[7:]
+    authorization = request.headers.get('Authorization','')[7:]
     path = request.path
     exclude =[
         '/v1/auth/login',
@@ -32,7 +32,7 @@ def jwt_required():
     return None
 
 def current_identity():
-    authorization = request.headers.get('Authorization')[7:]
+    authorization = request.headers.get('Authorization','')[7:]
     payload = jwt.decode(authorization, app.config.get('SECRET_KEY'))
     return UserModel.by(id=payload['sub'])
 
