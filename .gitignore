@@ -153,3 +153,6 @@ Thumbs.db #thumbnail cache on Windows
 
 cargamosapp.session.sql
 .vscode/settings.json
+storage/*.db
+
+deployments/dev
