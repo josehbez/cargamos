@@ -2,7 +2,7 @@
 #  Copyright (c) 2021 The Project Cargamos Authors
 import unittest
 import pdb
-from app import app, commun
+from app import app, commun, db
 import random
 
 class AppTestCase(unittest.TestCase):
@@ -13,9 +13,10 @@ class AppTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         self.app = app
-        self.client = self.app.test_client        
+        self.client = self.app.test_client                
         self.product_id = 0
         self.warehouse_id= 0
+        db.create_all()
         
 
     def test_auth(self):
