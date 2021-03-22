@@ -23,11 +23,22 @@ def api_load_resources():
     api.add_resource(Register, "/auth/register")
     api.add_resource(Login, "/auth/login")
     
-    from app.warehouse.resources import Warehouse as RSWarehouse
-    api.add_resource(RSWarehouse, "/warehouse", "/warehouse/<int:id>")
+    from app.warehouse.resources import Warehouse 
+    api.add_resource(Warehouse, "/warehouse", "/warehouse/<int:id>")
     
-    from app.product.resources import Product as RSProduct
-    api.add_resource(RSProduct, "/product", "/product/<string:id>")
+    from app.product.resources import Product
+    api.add_resource(Product, "/product", "/product/<string:id>")
+    
+    from app.stock.stock_move_resources import Purchase, Sale
+    api.add_resource(Purchase, "/purchase")
+    api.add_resource(Sale, "/sale")
+
+    from app.stock.stock_resources import Stock, StockProduct, StockWarehouse
+    api.add_resource(Stock, "/stock", "/stock/<int:product_id>/<int:warehouse_id>")
+    api.add_resource(StockProduct, "/stock/product/<int:product_id>")
+    api.add_resource(StockWarehouse, "/stock/warehouse/<int:warehouse_id>")
+    
+
 
 api_load_resources()
 

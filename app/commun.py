@@ -3,7 +3,14 @@
 from typing import Any
 from flask_restful import Resource
 from . import db
+import json
 
+def ppjson(s):
+    """
+        pretty print json
+    """
+    print(json.dumps(s, indent=4))
+    
 def is_int(s):
     """
         Check value is integer using cast

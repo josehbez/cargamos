@@ -18,7 +18,7 @@ class Product(commun.BaseModel):
         return {
             'id': self.id, 
             'name': self.name,
-            'sku': self.sku,
+            'sku': self.sku,            
         }
 
     @staticmethod
