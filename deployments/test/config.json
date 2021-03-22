@@ -1,0 +1,8 @@
+{
+    "SQLALCHEMY_TRACK_MODIFICATIONS": true,
+    "SQLALCHEMY_DATABASE_URI": "sqlite:///../storage/cargamos.db",
+
+    "DEBUG": true,
+    "TESTING": true,
+    "SECRET_KEY": "7\\xc6U\\x83x\\xccf%\\x9bM\\x0cy\\x01S\\x1f\\n_\\xca\\x04\\xb9=\\x08\\xfeN"
+}
