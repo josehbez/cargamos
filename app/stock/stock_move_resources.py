@@ -21,11 +21,11 @@ def stock_move_reqparse():
 def stock_move_transfer(ttype):
     args = stock_move_reqparse()
     if args.qty <= 0:
-        return rp(message="Quantity must be an integer and greater to zero")
+        return rp(message="Quantity must be an integer and greater to zero"), 404
     if args.product_id <= 0:
-        return rp(message="Product ID must be an integer. Check /VERSION/product")
+        return rp(message="Product ID must be an integer. Check /VERSION/product"), 404
     if args.warehouse_id <= 0:
-        return rp(message="Warehouse ID must be an integer. Check /VERSION/warehouse")
+        return rp(message="Warehouse ID must be an integer. Check /VERSION/warehouse"), 404
 
     product_id = ProductModel.by(id=args.product_id)
     warehouse_id = WarehouseModel.by(id=args.warehouse_id)
