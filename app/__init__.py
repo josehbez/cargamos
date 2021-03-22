@@ -54,4 +54,4 @@ def _jwt_required():
     if err != None:
         return err, 404
 
-db.create_all()
+#db.create_all()
