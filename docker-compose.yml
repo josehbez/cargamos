@@ -2,6 +2,7 @@ version: "3.7"
 
 services: 
   cargamos:
+    container_name: cargamos
     build: .
     #networks: 
     #  - utils_default

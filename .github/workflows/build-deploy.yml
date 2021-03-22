@@ -15,22 +15,19 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           export APP_SETTINGS=test
           python test.py
-
-
   
-#      - name: Deploy Production
-#        uses: appleboy/ssh-action@master
-#        with:
-#          password: ${{ secrets.DEPLOY_PASSWORD }}
-#          host: ${{ secrets.DEPLOY_IP }}
-#          username: ${{ secrets.DEPLOY_USER }}
-#          port: ${{ secrets.DEPLOY_PORT }}
-#          # check this https://docs.github.com/en/packages/guides/configuring-docker-for-use-with-github-packages
-#          script: |
-#            [[ ! -d cumplo ]] && git clone https://github.com/josehbez/cumplo.git
-#            [[ -d cumplo ]] && cd cumplo; git pull
-#            docker pull docker.pkg.github.com/josehbez/cumplo/cumplo:latest
-#            docker-compose stop
-#            docker rm webcumplo || true
-#            docker-compose up -d
-#            docker container  exec -t webcumplo python cumplo/manage.py migrate
+      - name: Deploy Production
+        uses: appleboy/ssh-action@master
+        with:
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          host: ${{ secrets.DEPLOY_IP }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: 22
+          script: |
+            [[ ! -d cargamos ]] && git clone https://github.com/josehbez/cargamos.git
+            [[ -d cargamos ]] && cd cargamos; git pull
+            export APP_SETTINGS=production
+            docker-compose stop || true
+            docker rm cargamos || true
+            docker-compose -f /mnt/cargamos/docker-compose.yml up --build -d
+            docker container  exec -t cargamos python manage.py db upgrade
