@@ -1,0 +1,21 @@
+version: "3.7"
+
+services: 
+  cargamos:
+    build: .
+    #networks: 
+    #  - utils_default
+    #external_links: 
+    #  - pg-10
+    environment: 
+      - APP_SETTINGS=${APP_SETTINGS}
+    ports:
+        - "8844:8844"
+    volumes:
+        - /mnt/cargamos/production:/cargamos/deployments/production
+        - ./deployments/dev:/cargamos/deployments/dev
+        - ./deployments/test:/cargamos/deployments/test
+#networks:
+#  utils_default:
+#    external: true
+      
