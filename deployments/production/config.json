@@ -1,0 +1,8 @@
+{
+    "SQLALCHEMY_TRACK_MODIFICATIONS": true,
+    "SQLALCHEMY_DATABASE_URI": "postgresql://pg10:pg10@pg-10/cargamos",
+
+    "DEBUG": false,
+    "TESTING": false,
+    "SECRET_KEY": "d\\x8d;\\xbfl\\x08\\xc3\\xb9\\xb7=*\\x8c\\x99^\\xd3\\x017\\xa2\\xb6A\\x9d!\\xecR"
+}
