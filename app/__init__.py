@@ -10,6 +10,9 @@ app = Flask(__name__)
 
 # Load config
 config_name = os.getenv('APP_SETTINGS', 'dev')
+if not len(config_name):
+    config_name='dev'
+    
 app.config.from_json("../deployments/%s/config.json" %  config_name)
 
 # DB manager 
