@@ -184,4 +184,3 @@ GET /v1/stock/{{PRODUCT_ID}}/{{WH_ID}} HTTP/1.1
 export APP_SETTINGS=test
 python test.py
 ```
-
